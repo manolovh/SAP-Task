@@ -15,9 +15,9 @@ public class SpecialNumber
     	System.out.println(totalTimeInNanoseconds);
     }
 
-    public static void printSpecialNumber(boolean[] isNumberUsed, long currentNumber, int currentLength)
+    public static void printSpecialNumber(boolean[] isNumberUsed, long currentNumber, int currentNumLength)
     {
-        if (currentLength == 10)
+        if (currentNumLength == 10)
         {
             System.out.println(currentNumber);
             return;
@@ -30,10 +30,10 @@ public class SpecialNumber
         		continue;
         	}
 
-        	if (!isNumberUsed[nextNumber] && (currentNumber * 10 + nextNumber) % (currentLength + 1) == 0)
+        	if (!isNumberUsed[nextNumber] && (currentNumber * 10 + nextNumber) % (currentNumLength + 1) == 0)
         	{
         		isNumberUsed[nextNumber] = true;
-        		printSpecialNumber(isNumberUsed, currentNumber * 10 + nextNumber, currentLength + 1);
+        		printSpecialNumber(isNumberUsed, currentNumber * 10 + nextNumber, currentNumLength + 1);
         		isNumberUsed[nextNumber] = false;
         	}
         }
