@@ -4,34 +4,31 @@ public class SpecialNumbers
 {
     public static void printNumbersInRange()
     {
-        StringBuilder number = new StringBuilder("0000000000");
         boolean[] usedNumbers = new boolean[10];
-        for (char currChar = '1'; currChar <= '9'; currChar++)
+        for (int currNum = 1; currNum <= 9; currNum++)
         {
-        	number.setCharAt(0, currChar);
-        	usedNumbers[currChar - '0'] = true;
+        	usedNumbers[currNum] = true;
         	
-        	printNumbersUtil(usedNumbers, number, 1, currChar - '0');
+        	printNumbersUtil(usedNumbers, currNum, 1);
         	
-        	usedNumbers[currChar - '0'] = false;
+        	usedNumbers[currNum] = false;
         }
     }
 
-    public static void printNumbersUtil(boolean[] usedNumbers, StringBuilder number, int currLength, int currSum)
+    public static void printNumbersUtil(boolean[] usedNumbers, long number, int currLength)
     {
         if (currLength == 10)
         {
-            System.out.println(number.toString());
+            System.out.println(number);
             return;
         }
 
         for (int newNum = 0; newNum <= 9; newNum++)
         {
-        	number.setCharAt(currLength, (char) (newNum + '0'));
-        	if (usedNumbers[newNum] == false && Long.parseLong(number.substring(0, currLength+1)) % (currLength + 1) == 0)
+        	if (!usedNumbers[newNum] && (number * 10 + newNum) % (currLength + 1) == 0)
         	{
         		usedNumbers[newNum] = true;
-                printNumbersUtil(usedNumbers, number, currLength + 1, currSum + newNum);
+                printNumbersUtil(usedNumbers, number * 10 + newNum, currLength + 1);
                 
                 usedNumbers[newNum] = false;
         	}
