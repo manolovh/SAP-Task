@@ -1,8 +1,9 @@
 package assignment;
 
-public class SpecialNumbers {
-
-    public static void printNumbersInRange() {
+public class SpecialNumbers
+{
+    public static void printNumbersInRange()
+    {
         char[] number = new char[10];
         for (char currChar = '1'; currChar <= '9'; currChar++)
         {
@@ -11,13 +12,16 @@ public class SpecialNumbers {
         }
     }
 
-    public static void printNumbersUtil(char[] number, int currLength, int currSum) {
-        if (currLength == number.length) {
+    public static void printNumbersUtil(char[] number, int currLength, int currSum)
+    {
+        if (currLength == number.length)
+        {
             System.out.println(number);
             return;
         }
 
-        for (int newNum = 0; newNum <= 9; newNum++) {
+        for (int newNum = 0; newNum <= 9; newNum++)
+        {
         	if ((currSum + newNum) % (currLength + 1) == 0)
         	{
                 number[currLength] = (char) ('0' + newNum);
@@ -26,7 +30,8 @@ public class SpecialNumbers {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
     	long startTime = System.nanoTime();
 
         printNumbersInRange();
