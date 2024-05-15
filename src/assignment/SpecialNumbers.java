@@ -4,16 +4,16 @@ public class SpecialNumbers {
 
     public static void printNumbersInRange() {
         char[] number = new char[10];
-        for (char curr_char = '1'; curr_char <= '9'; curr_char++)
+        for (char currChar = '1'; currChar <= '9'; currChar++)
         {
-        	number[0] = curr_char;
-        	printNumbersUtil(number, 1, curr_char - '0');
+        	number[0] = currChar;
+        	printNumbersUtil(number, 1, currChar - '0');
         }
     }
 
     public static void printNumbersUtil(char[] number, int currLength, int currSum) {
         if (currLength == number.length) {
-//            System.out.println(number);
+            System.out.println(number);
             return;
         }
 
