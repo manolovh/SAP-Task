@@ -2,7 +2,7 @@ package assignment;
 
 public class SpecialNumbers
 {
-    public static void printNumbersInRange()
+    public static void printSpecialNumbers()
     {
         boolean[] usedNumbers = new boolean[10];
         for (int currNum = 1; currNum <= 9; currNum++)
@@ -39,7 +39,7 @@ public class SpecialNumbers
     {
     	long startTime = System.nanoTime();
 
-        printNumbersInRange();
+        printSpecialNumbers();
         
     	long endTime = System.nanoTime();
     	
