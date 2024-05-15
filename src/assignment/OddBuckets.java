@@ -11,12 +11,26 @@ public class OddBuckets
 	
 	public static void main(String[] args)
 	{
-		int[] uniqueNums = new int[] {1, 2, 4, 8, 16, 32, 64, 128, 256, 512};
+		// Random array. Code will also work with dynamically created
+		//  or manually modified arrays of different sizes
 		int[] inputBoxes = new int[] {
 			NORMAL_WEIGHT, ODD_WEIGHT, NORMAL_WEIGHT, NORMAL_WEIGHT, ODD_WEIGHT,
-			NORMAL_WEIGHT, NORMAL_WEIGHT, NORMAL_WEIGHT, ODD_WEIGHT, ODD_WEIGHT
+			NORMAL_WEIGHT, NORMAL_WEIGHT, ODD_WEIGHT, ODD_WEIGHT, NORMAL_WEIGHT
 		};
 		
+		// Create array of unique numbers of power of two
+		int[] uniqueNums = new int[inputBoxes.length];
+		for (int i = 0; i < uniqueNums.length; i++)
+		{
+			if (i == 0)
+			{
+				uniqueNums[i] = 1;
+			} else
+			{
+				uniqueNums[i] = uniqueNums[i - 1] * 2;
+			}
+		}
+
 		int sum = getBalls(uniqueNums, inputBoxes);
 		List<Integer> oddBoxes = getOddBoxes(uniqueNums, sum);
 
@@ -28,7 +42,7 @@ public class OddBuckets
 	 *  Subtracts from the total sum, the "base weight" (NORMAL_WEIGHT * numOfBallsTaken) of
 	 *    the balls, taken from each box.
 	 *    
-	 *  A box with odd weight is a box, whose (weight * numOfBallsTaken - NORMAL_WEIGHT * numberOfBallsTaken)
+	 *  A box with odd balls is a box, whose (weight * numOfBallsTaken - NORMAL_WEIGHT * numberOfBallsTaken)
 	 *    is greater than zero and present in the sum. Adds to answer the odd box index + 1. (Avoids zero enumerated indexes)
 	 */
 	public static List<Integer> getOddBoxes(int[] uniqueNums, int sum)
@@ -40,16 +54,16 @@ public class OddBuckets
 			sum -= NORMAL_WEIGHT * uniqueNums[i];
 		}
 
-		for (int i = uniqueNums.length - 1; i >= 0; i--)
+		sum /= ODD_WEIGHT - NORMAL_WEIGHT;
+		String binarySum = Integer.toBinaryString(sum);
+		
+		for (int i = binarySum.length() - 1; i >= 0; i--)
 		{
-			if (uniqueNums[i] <= sum)
+			if (binarySum.charAt(i) == '1')
 			{
-				answer.add(i + 1);
-				sum -= uniqueNums[i];
+				answer.add(binarySum.length() - i);
 			}
 		}
-		
-		Collections.reverse(answer);
 		
 		return answer;
 	}
@@ -61,7 +75,7 @@ public class OddBuckets
 	public static int getBalls(int[] uniqueNums, int[] inputBoxes)
 	{
 		int sum = 0;
-		
+
 		for (int i = 0; i < uniqueNums.length; i++)
 		{
 			sum += uniqueNums[i] * inputBoxes[i];
