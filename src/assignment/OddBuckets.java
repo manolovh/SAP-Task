@@ -14,8 +14,8 @@ public class OddBuckets
 		// Random array. Code will also work with dynamically created
 		//  or manually modified arrays of different sizes
 		int[] inputBoxes = new int[] {
-			NORMAL_WEIGHT, ODD_WEIGHT, NORMAL_WEIGHT, NORMAL_WEIGHT, ODD_WEIGHT,
-			NORMAL_WEIGHT, NORMAL_WEIGHT, ODD_WEIGHT, ODD_WEIGHT, NORMAL_WEIGHT
+			ODD_WEIGHT, NORMAL_WEIGHT, NORMAL_WEIGHT, NORMAL_WEIGHT, ODD_WEIGHT,
+			NORMAL_WEIGHT, NORMAL_WEIGHT, ODD_WEIGHT, ODD_WEIGHT, ODD_WEIGHT
 		};
 		
 		// Create array of unique numbers of power of two
