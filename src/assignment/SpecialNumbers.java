@@ -11,17 +11,17 @@ public class SpecialNumbers {
         }
     }
 
-    public static void printNumbersUtil(char[] number, int numLength, int currSum) {
-        if (numLength == number.length) {
+    public static void printNumbersUtil(char[] number, int currLength, int currSum) {
+        if (currLength == number.length) {
 //            System.out.println(number);
             return;
         }
 
         for (int newNum = 0; newNum <= 9; newNum++) {
-        	if ((currSum + newNum) % (numLength + 1) == 0)
+        	if ((currSum + newNum) % (currLength + 1) == 0)
         	{
-                number[numLength] = (char) ('0' + newNum);
-                printNumbersUtil(number, numLength + 1, currSum + newNum);        		
+                number[currLength] = (char) ('0' + newNum);
+                printNumbersUtil(number, currLength + 1, currSum + newNum);        		
         	}
         }
     }
