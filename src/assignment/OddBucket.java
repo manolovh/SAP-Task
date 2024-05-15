@@ -12,8 +12,8 @@ public class OddBucket
 	{
 		// Sample input
 		int[] inputBoxes = new int[] {
-			HEAVIER_WEIGHT, REGULAR_WEIGHT, REGULAR_WEIGHT, REGULAR_WEIGHT, HEAVIER_WEIGHT,
-			REGULAR_WEIGHT, REGULAR_WEIGHT, HEAVIER_WEIGHT, REGULAR_WEIGHT, HEAVIER_WEIGHT
+			REGULAR_WEIGHT, REGULAR_WEIGHT, REGULAR_WEIGHT, HEAVIER_WEIGHT, REGULAR_WEIGHT,
+			REGULAR_WEIGHT, HEAVIER_WEIGHT, HEAVIER_WEIGHT, REGULAR_WEIGHT, HEAVIER_WEIGHT
 		};
 
 		printOddBoxes(inputBoxes);
@@ -28,23 +28,18 @@ public class OddBucket
 			powersOfTwoArray[power] = (int) Math.pow(2, power);
 		}
 
-		int ballsSum = selectBallsFromBoxes(powersOfTwoArray, inputBoxes);
-		List<Integer> oddBoxes = getOddBoxes(powersOfTwoArray, ballsSum);
+		int heavierBallsSum = getHeavierBallsSum(powersOfTwoArray, inputBoxes);
+		List<Integer> oddBoxes = getOddBoxes(powersOfTwoArray, heavierBallsSum);
 
 		System.out.println(oddBoxes);
 	}
 
-	public static List<Integer> getOddBoxes(int[] powersOfTwoArray, int ballSum)
+	public static List<Integer> getOddBoxes(int[] powersOfTwoArray, int heavierBallsSum)
 	{
 		var answer = new ArrayList<Integer>();
 
-		for (int index = 0; index < powersOfTwoArray.length; index++)
-		{
-			ballSum -= REGULAR_WEIGHT * powersOfTwoArray[index];
-		}
-
-		ballSum /= HEAVIER_WEIGHT - REGULAR_WEIGHT;
-		String binaryBallSum = Integer.toBinaryString(ballSum);
+		heavierBallsSum /= HEAVIER_WEIGHT - REGULAR_WEIGHT;
+		String binaryBallSum = Integer.toBinaryString(heavierBallsSum);
 
 		for (int index = binaryBallSum.length() - 1; index >= 0; index--)
 		{
@@ -53,19 +48,19 @@ public class OddBucket
 				answer.add(binaryBallSum.length() - index);
 			}
 		}
-		
+
 		return answer;
 	}
 
-	public static int selectBallsFromBoxes(int[] multiplicationArray, int[] inputBoxes)
+	public static int getHeavierBallsSum(int[] powersOfTwoArray, int[] inputBoxes)
 	{
-		int ballsSum = 0;
+		int heavierBallsSum = 0;
 
-		for (int index = 0; index < multiplicationArray.length; index++)
+		for (int index = 0; index < powersOfTwoArray.length; index++)
 		{
-			ballsSum += multiplicationArray[index] * inputBoxes[index];
+			heavierBallsSum += inputBoxes[index] * powersOfTwoArray[index] - REGULAR_WEIGHT * powersOfTwoArray[index];
 		}
 		
-		return ballsSum;
+		return heavierBallsSum;
 	}
 }
