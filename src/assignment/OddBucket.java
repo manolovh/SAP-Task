@@ -58,7 +58,7 @@ public class OddBucket
 
 		for (int index = 0; index < powersOfTwoArray.length; index++)
 		{
-			heavierBallsSum += inputBoxes[index] * powersOfTwoArray[index] - REGULAR_WEIGHT * powersOfTwoArray[index];
+			heavierBallsSum += (inputBoxes[index] - REGULAR_WEIGHT) * powersOfTwoArray[index];
 		}
 		
 		return heavierBallsSum;
