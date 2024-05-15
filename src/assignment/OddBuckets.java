@@ -29,7 +29,7 @@ public class OddBuckets
 	 *    the balls, taken from each box.
 	 *    
 	 *  A box with odd weight is a box, whose (weight * numOfBallsTaken - NORMAL_WEIGHT * numberOfBallsTaken)
-	 *    is present in the sum. Adds to answer the odd box index + 1. (Avoids zero enumerated indexes)
+	 *    is greater than zero and present in the sum. Adds to answer the odd box index + 1. (Avoids zero enumerated indexes)
 	 */
 	public static List<Integer> getOddBoxes(int[] uniqueNums, int sum)
 	{
