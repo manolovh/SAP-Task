@@ -15,11 +15,17 @@ public class OddBuckets
 		//  or manually modified arrays of different sizes
 		int[] inputBoxes = new int[] {
 			ODD_WEIGHT, NORMAL_WEIGHT, NORMAL_WEIGHT, NORMAL_WEIGHT, ODD_WEIGHT,
-			NORMAL_WEIGHT, NORMAL_WEIGHT, ODD_WEIGHT, ODD_WEIGHT, ODD_WEIGHT
+			NORMAL_WEIGHT, NORMAL_WEIGHT, ODD_WEIGHT, ODD_WEIGHT, NORMAL_WEIGHT
 		};
 		
-		// Create array of unique numbers of power of two
+		printOddBoxes(inputBoxes);
+	}
+	
+	public static void printOddBoxes(int[] inputBoxes)
+	{
+		// Create an array of unique numbers of power of two
 		int[] uniqueNums = new int[inputBoxes.length];
+
 		for (int i = 0; i < uniqueNums.length; i++)
 		{
 			if (i == 0)
@@ -42,8 +48,8 @@ public class OddBuckets
 	 *  Subtracts from the total sum, the "base weight" (NORMAL_WEIGHT * numOfBallsTaken) of
 	 *    the balls, taken from each box.
 	 *    
-	 *  A box with odd balls is a box, whose (weight * numOfBallsTaken - NORMAL_WEIGHT * numberOfBallsTaken)
-	 *    is greater than zero and present in the sum. Adds to answer the odd box index + 1. (Avoids zero enumerated indexes)
+	 *  A box contains odd balls when 2^box_num in binary representation is '1'.
+	 *    Adds to answer the odd box index + 1. (Avoids zero enumerated indexes)
 	 */
 	public static List<Integer> getOddBoxes(int[] uniqueNums, int sum)
 	{
@@ -68,9 +74,7 @@ public class OddBuckets
 		return answer;
 	}
 	
-	/** Pick up one ball from the first box and doubles the count of balls taken
-	 *   from each following box.
-	 *  This will later help you differentiate which boxes have balls with "odd weight"
+	/** Get unique number of balls from each box
 	 */
 	public static int getBalls(int[] uniqueNums, int[] inputBoxes)
 	{
