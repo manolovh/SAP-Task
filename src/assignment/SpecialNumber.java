@@ -2,12 +2,14 @@ package assignment;
 
 public class SpecialNumber
 {
+	static final int MAX_NUM_LENGTH = 10;
+	
     public static void main(String[] args)
     {
     	long startTime = System.nanoTime();
 
-    	boolean[] isNumberUsed = new boolean[10];
-    	printSpecialNumber(isNumberUsed, 0, 0);
+    	boolean[] isNumberUsed = new boolean[MAX_NUM_LENGTH];
+    	generateAndPrintSpecialNumbers(isNumberUsed, 0, 0);
 
     	long endTime = System.nanoTime();
 
@@ -15,9 +17,9 @@ public class SpecialNumber
     	System.out.println(totalTimeInNanoseconds);
     }
 
-    public static void printSpecialNumber(boolean[] isNumberUsed, long currentNumber, int currentNumLength)
+    public static void generateAndPrintSpecialNumbers(boolean[] isNumberUsed, long currentNumber, int currentNumLength)
     {
-        if (currentNumLength == 10)
+        if (currentNumLength == MAX_NUM_LENGTH)
         {
             System.out.println(currentNumber);
             return;
@@ -25,17 +27,18 @@ public class SpecialNumber
 
         for (int nextNumber = 0; nextNumber <= 9; nextNumber++)
         {
-        	if (currentNumber == 0 && nextNumber == 0)
-        	{
-        		continue;
-        	}
-
-        	if (!isNumberUsed[nextNumber] && (currentNumber * 10 + nextNumber) % (currentNumLength + 1) == 0)
+        	if (isValidNumber(isNumberUsed, currentNumber, nextNumber, currentNumLength))
         	{
         		isNumberUsed[nextNumber] = true;
-        		printSpecialNumber(isNumberUsed, currentNumber * 10 + nextNumber, currentNumLength + 1);
+        		generateAndPrintSpecialNumbers(isNumberUsed, currentNumber * 10 + nextNumber, currentNumLength + 1);
         		isNumberUsed[nextNumber] = false;
         	}
         }
+    }
+    
+    public static boolean isValidNumber(boolean[] isNumberUsed, long currentNumber, int nextNumber, int currentNumLength)
+    {
+        return !(currentNumber == 0 && nextNumber == 0) && !isNumberUsed[nextNumber]
+        		&& (currentNumber * 10 + nextNumber) % (currentNumLength + 1) == 0;
     }
 }
