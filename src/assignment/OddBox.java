@@ -18,7 +18,7 @@ public class OddBox
 		};
 
 		List<Integer> oddBoxes = getOddBoxes(inputBoxes);
-		System.out.println(oddBoxes);
+		System.out.println("Odd boxes (1-indexed): " + oddBoxes);
 	}
 
 	public static List<Integer> getOddBoxes(int[] inputBoxes)
