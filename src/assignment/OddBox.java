@@ -13,8 +13,8 @@ public class OddBox
 	{
 		// Sample input
 		int[] inputBoxes = new int[] {
-			REGULAR_WEIGHT, REGULAR_WEIGHT, REGULAR_WEIGHT, HEAVIER_WEIGHT, REGULAR_WEIGHT,
-			REGULAR_WEIGHT, HEAVIER_WEIGHT, HEAVIER_WEIGHT, REGULAR_WEIGHT, HEAVIER_WEIGHT
+			HEAVIER_WEIGHT, REGULAR_WEIGHT, REGULAR_WEIGHT, HEAVIER_WEIGHT, REGULAR_WEIGHT,
+			REGULAR_WEIGHT, REGULAR_WEIGHT, HEAVIER_WEIGHT, REGULAR_WEIGHT, HEAVIER_WEIGHT
 		};
 
 		List<Integer> oddBoxes = getOddBoxes(inputBoxes);
@@ -25,49 +25,49 @@ public class OddBox
 	{
 		int[] powersOfTwoArray = generatePowersOfTwoArray(inputBoxes.length);
 
-		int totalBallWeight = getTotalBallWeight(powersOfTwoArray, inputBoxes);
+		int totalBallsWeight = getTotalBallsWeight(powersOfTwoArray, inputBoxes);
 		
-		List<Integer> oddBoxes = findOddBoxes(powersOfTwoArray, totalBallWeight);
+		List<Integer> oddBoxes = findOddBoxes(powersOfTwoArray, totalBallsWeight);
 
 		return oddBoxes;
 	}
 
-	public static List<Integer> findOddBoxes(int[] powersOfTwoArray, int totalBallWeight)
+	public static List<Integer> findOddBoxes(int[] powersOfTwoArray, int totalBallsWeight)
 	{
 		var answer = new ArrayList<Integer>();
 
-		int regularBallWeight = 0;
+		int regularBallsWeight = 0;
 		for (int numOfBalls: powersOfTwoArray)
 		{
-			regularBallWeight += REGULAR_WEIGHT * numOfBalls;
+			regularBallsWeight += REGULAR_WEIGHT * numOfBalls;
 		}
 
-		totalBallWeight -= regularBallWeight;
-		totalBallWeight /= WEIGHT_DIFFERENCE;
+		totalBallsWeight -= regularBallsWeight;
+		totalBallsWeight /= WEIGHT_DIFFERENCE;
 
-		String binaryBallSum = Integer.toBinaryString(totalBallWeight);
+		String binaryTotalBallsWeight = Integer.toBinaryString(totalBallsWeight);
 
-		for (int index = binaryBallSum.length() - 1; index >= 0; index--)
+		for (int index = binaryTotalBallsWeight.length() - 1; index >= 0; index--)
 		{
-			if (binaryBallSum.charAt(index) == '1')
+			if (binaryTotalBallsWeight.charAt(index) == '1')
 			{
-				answer.add(binaryBallSum.length() - index);
+				answer.add(binaryTotalBallsWeight.length() - index);
 			}
 		}
 
 		return answer;
 	}
 
-	public static int getTotalBallWeight(int[] powersOfTwoArray, int[] inputBoxes)
+	public static int getTotalBallsWeight(int[] powersOfTwoArray, int[] inputBoxes)
 	{
-		int totalBallWeight = 0;
+		int totalBallsWeight = 0;
 
 		for (int index = 0; index < powersOfTwoArray.length; index++)
 		{
-			totalBallWeight += inputBoxes[index] * powersOfTwoArray[index];
+			totalBallsWeight += inputBoxes[index] * powersOfTwoArray[index];
 		}
 		
-		return totalBallWeight;
+		return totalBallsWeight;
 	}
 	
     public static int[] generatePowersOfTwoArray(int length)
