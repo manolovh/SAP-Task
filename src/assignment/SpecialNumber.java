@@ -27,7 +27,7 @@ public class SpecialNumber
 
         for (int nextNumber = 0; nextNumber <= 9; nextNumber++)
         {
-        	if (isValidNumber(isNumberUsed, currentNumber, nextNumber, currentNumLength))
+        	if (isSpecialNumber(isNumberUsed, currentNumber, nextNumber, currentNumLength))
         	{
         		isNumberUsed[nextNumber] = true;
         		generateAndPrintSpecialNumbers(isNumberUsed, currentNumber * 10 + nextNumber, currentNumLength + 1);
@@ -36,7 +36,7 @@ public class SpecialNumber
         }
     }
     
-    public static boolean isValidNumber(boolean[] isNumberUsed, long currentNumber, int nextNumber, int currentNumLength)
+    public static boolean isSpecialNumber(boolean[] isNumberUsed, long currentNumber, int nextNumber, int currentNumLength)
     {
         return !(currentNumber == 0 && nextNumber == 0) && !isNumberUsed[nextNumber]
         		&& (currentNumber * 10 + nextNumber) % (currentNumLength + 1) == 0;
